@@ -1,10 +1,7 @@
 package course.homework;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.regex.Pattern;
+
 
 public class HomeWork1 {
 
@@ -33,16 +30,41 @@ public class HomeWork1 {
     }
 
     public boolean convention(String line){
-       line = line.trim().replaceAll("[^()]","");//удаляем символы кроме скобок
-       if (line.length() % 2 == 0){//Должно быть четное количество символов всегда. Хотя наверное это и так ниже можно понять по конечной длинне строки?
-            while (line.contains("()")) { //задаем цикл while, который будет работать до тех пор, пока будет находить пару скобок
-               line = line.replaceAll("\\(\\)","");// в это время эту пару скобок он удаляет и присваивает новое значение для строки
+       line = line.trim().replaceAll("[^()]","");                       //удаляем символы кроме скобок
+       if (line.length() % 2 == 0){                                     //Должно быть четное количество символов всегда. Хотя наверное это и так ниже можно понять по конечной длинне строки
+            while (line.contains("()")) {                               //задаем цикл while, который будет работать до тех пор, пока будет находить пару скобок
+               line = line.replaceAll("\\(\\)","");                     // в это время эту пару скобок он удаляет и присваивает новое значение для строки
             }
-            return line.length() == 0; // проверяется равна ли длинна строки конечная 0 Да = true, Нет = false
+            return line.length() == 0;                                  // проверяется равна ли длинна строки конечная 0 Да = true, Нет = false
         }
         return false;
     }
 
 
-
+    //Через цикл
+    public boolean convention2(String line){
+     int count = 0;
+     for (int i = 0; i < line.length(); i++){
+         if (line.substring(i,i+1).equals("(") ){  //можно заменить на charAt и тогда можно использовать обычное сравнение ==
+             count++;
+         }
+         else if (line.substring(i,i+1).equals(")")){
+             count--;
+         }
+         else{
+             continue;
+         }
+         if (count < 0){
+             return  false;
+         }
+     }
+     return count == 0;
+    }
+    
+    
 }
+   
+
+
+
+
